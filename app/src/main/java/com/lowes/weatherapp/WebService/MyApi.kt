@@ -2,13 +2,11 @@ package com.lowes.weatherapp.WebService
 
 import com.google.gson.GsonBuilder
 import com.lowes.weatherapp.WebService.Objects.Example
-import com.lowes.weatherapp.WebService.Objects.Starwars
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
