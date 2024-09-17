@@ -56,15 +56,10 @@ class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
                                             permissions: Array<out String>,
                                             grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                initializeApp(null)
-            } else {
-                Toast.makeText(this, "Location permission is required", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
+            initializeApp(null)
 
+
+    }
     override fun onBackPressed() {
         val fragmentCount = supportFragmentManager.backStackEntryCount
         if (fragmentCount > 1) {

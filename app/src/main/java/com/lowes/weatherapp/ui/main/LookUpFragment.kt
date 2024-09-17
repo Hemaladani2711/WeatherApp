@@ -33,8 +33,6 @@ class LookUpFragment : Fragment() {
         val view = inflater.inflate(R.layout.look_up_fragment, container, false)
         edtCity = view.findViewById(R.id.edtCityName)
         btnLookUp = view.findViewById(R.id.btnCity)
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(requireContext())
         return view
     }
 
@@ -48,11 +46,11 @@ class LookUpFragment : Fragment() {
         edtCity.setText(city)
         getLastKnownLocation()
         btnLookUp.setOnClickListener {
-            if (city.isEmpty()) {
+            if (edtCity.text.toString().isEmpty()) {
                 Toast.makeText(requireContext(), "City name cannot be empty", Toast.LENGTH_SHORT)
                     .show()
             } else {
-                val fragment = ItemFragment.newInstance(city)
+                val fragment = ItemFragment.newInstance(edtCity.text.toString())
                 activity?.supportFragmentManager?.beginTransaction()
                     ?.replace(R.id.container, fragment)?.addToBackStack(null)?.commit()
             }
@@ -61,6 +59,8 @@ class LookUpFragment : Fragment() {
 
     private fun getLastKnownLocation() {
         if (checkLocationPermission(requireContext())) {
+            fusedLocationProviderClient =
+                LocationServices.getFusedLocationProviderClient(requireContext())
             fusedLocationProviderClient?.lastLocation?.addOnSuccessListener { location ->
                 val longitude = location.longitude
                 val latitude = location.latitude
