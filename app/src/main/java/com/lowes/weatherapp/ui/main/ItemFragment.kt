@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,63 +17,56 @@ import com.lowes.weatherapp.WebService.Objects.Example
 /**
  * A fragment representing a list of Items.
  */
-const val CITY:String = "city"
+const val CITY: String = "city"
 
-class ItemFragment : Fragment(),RecyClerViewClickListener {
-    lateinit var viewModel:MainViewModel
+class ItemFragment : Fragment(), RecyClerViewClickListener {
+    lateinit var viewModel: MainViewModel
     lateinit var listView: RecyclerView
     lateinit var cityName: String
-    lateinit var values:Example
+    lateinit var values: Example
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        arguments?.getString(CITY)?.let{
-            cityName=it
+        arguments?.getString(CITY)?.let {
+            cityName = it
         }
     }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
-        listView  = view.findViewById(R.id.list)
+        listView = view.findViewById(R.id.list)
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.getWeatherData(cityName).observe(viewLifecycleOwner, Observer { items->
-            items?.let{items->
-                values=items
-                listView.let {list->
-                    list.layoutManager=LinearLayoutManager(context)
-                    val adapter=WeatherDataAdapter(items)
+        viewModel.getWeatherData(cityName).observe(viewLifecycleOwner, Observer { items ->
+            items?.let { items ->
+                values = items
+                listView.let { list ->
+                    list.layoutManager = LinearLayoutManager(context)
+                    val adapter = WeatherDataAdapter(items)
                     adapter.setRecyclerListener(this)
-                    list.adapter=adapter
+                    list.adapter = adapter
                 }
             }
-
         })
-
     }
 
     companion object {
-        fun newInstance(cityName:String) = ItemFragment().apply {
-            arguments=Bundle().apply {
-                putString(CITY,cityName)
+        fun newInstance(cityName: String) = ItemFragment().apply {
+            arguments = Bundle().apply {
+                putString(CITY, cityName)
             }
         }
     }
 
     override fun recyclerViewListClicked(v: View?, position: Int) {
-            val fragment = DetailFragment.newInstance(values.list[position])
-            activity?.supportFragmentManager
-                ?.beginTransaction()
-                ?.replace(R.id.container,fragment)
-                ?.addToBackStack(null)
-                ?.commit()
+        val fragment = DetailFragment.newInstance(values.list[position])
+        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, fragment)
+            ?.addToBackStack(null)?.commit()
     }
-
-
 }
