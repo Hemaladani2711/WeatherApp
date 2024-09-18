@@ -57,6 +57,7 @@ class LookUpFragment : Fragment() {
         }
     }
 
+    //Get Last known location using GeoCoder and set in edit text
     private fun getLastKnownLocation() {
         if (checkLocationPermission(requireContext())) {
             fusedLocationProviderClient =
@@ -67,9 +68,7 @@ class LookUpFragment : Fragment() {
                 val geocoder = Geocoder(requireContext())
                 val addresses = geocoder.getFromLocation(latitude, longitude, 1)
                 city = addresses?.get(0)?.locality.toString()
-                city.let {
-                    edtCity.setText(it)
-                }
+                edtCity.setText(city)
             }
         }
     }
