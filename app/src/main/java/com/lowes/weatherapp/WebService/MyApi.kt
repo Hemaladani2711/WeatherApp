@@ -11,9 +11,6 @@ import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 interface MyApi {
-        private val API_KEY: String
-            get() = "65d00499677e59496ca2f318eb68c049"
-
     companion object {
             val BASE_URL:String="https://api.openweathermap.org/data/2.5/"
             var longerTimeoutClient = OkHttpClient.Builder()
@@ -37,7 +34,7 @@ interface MyApi {
         @GET("forecast?")
         fun getCityWeatherData(@Query("q") q:String,
                                @Query("appid")appid:String=
-        API_KEY,@Query("units")units:String="imperial"): Call<Example>
+        "65d00499677e59496ca2f318eb68c049",@Query("units")units:String="imperial"): Call<Example>
 
 
 }

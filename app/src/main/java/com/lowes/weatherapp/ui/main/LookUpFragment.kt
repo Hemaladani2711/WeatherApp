@@ -63,12 +63,15 @@ class LookUpFragment : Fragment() {
             fusedLocationProviderClient =
                 LocationServices.getFusedLocationProviderClient(requireContext())
             fusedLocationProviderClient?.lastLocation?.addOnSuccessListener { location ->
-                val longitude = location.longitude
-                val latitude = location.latitude
-                val geocoder = Geocoder(requireContext())
-                val addresses = geocoder.getFromLocation(latitude, longitude, 1)
-                city = addresses?.get(0)?.locality.toString()
-                edtCity.setText(city)
+                location?.let {
+                    val longitude = location.longitude
+                    val latitude = location.latitude
+                    val geocoder = Geocoder(requireContext())
+                    val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+                    city = addresses?.get(0)?.locality.toString()
+                    edtCity.setText(city)
+
+                }
             }
         }
     }
