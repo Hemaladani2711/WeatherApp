@@ -10,7 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RepositoryImpl:Repository {
-    override fun getCityWeatherData(cityName:String): LiveData<Example?> {
+    override fun getCityWeatherData(cityName:String): MutableLiveData<Example?> {
         val data = MutableLiveData<Example?>()
         var apiService: MyApi = MyApi.create()
         var mCallGetData: Call<Example> = apiService.getCityWeatherData(cityName)
@@ -21,7 +21,7 @@ class RepositoryImpl:Repository {
             }
 
             override fun onResponse(call: Call<Example?>, response: Response<Example?>) {
-                Log.d("Success","")
+                //Log.d("Success","")
                 val city: Example?=response.body()
                 data.value=city
             }

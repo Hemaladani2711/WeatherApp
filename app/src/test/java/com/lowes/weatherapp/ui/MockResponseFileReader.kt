@@ -13,7 +13,6 @@ object MockResponseFileReader {
             inputStream = javaClass.classLoader?.getResourceAsStream(fileName)
             val builder = StringBuilder()
             val reader = BufferedReader(InputStreamReader(inputStream))
-
             var str: String? = reader.readLine()
             while (str != null) {
                 builder.append(str)
