@@ -14,7 +14,7 @@ private const val LIST = "list"
 
 
 
-class DetailFragment : Fragment() {
+class WeatherDetailFragment : Fragment() {
     private var listItem: List? = null
     lateinit var txtTemp:TextView
     lateinit var txtFeelsLike:TextView
@@ -49,7 +49,7 @@ class DetailFragment : Fragment() {
 
     companion object {
 
-        fun newInstance(item:List?) = DetailFragment().apply {
+        fun newInstance(item:List?) = WeatherDetailFragment().apply {
 
             arguments=Bundle().apply {
                 putSerializable(LIST,item)

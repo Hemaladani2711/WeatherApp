@@ -19,7 +19,7 @@ import com.lowes.weatherapp.WebService.Objects.Example
  */
 const val CITY: String = "city"
 
-class ItemFragment : Fragment(), RecyClerViewClickListener {
+class WeatherForecastFragment : Fragment(), RecyClerViewClickListener {
     lateinit var viewModel: MainViewModel
     lateinit var listView: RecyclerView
     lateinit var cityName: String
@@ -57,7 +57,7 @@ class ItemFragment : Fragment(), RecyClerViewClickListener {
     }
 
     companion object {
-        fun newInstance(cityName: String) = ItemFragment().apply {
+        fun newInstance(cityName: String) = WeatherForecastFragment().apply {
             arguments = Bundle().apply {
                 putString(CITY, cityName)
             }
@@ -65,7 +65,7 @@ class ItemFragment : Fragment(), RecyClerViewClickListener {
     }
 
     override fun recyclerViewListClicked(v: View?, position: Int) {
-        val fragment = DetailFragment.newInstance(values.list[position])
+        val fragment = WeatherDetailFragment.newInstance(values.list[position])
         activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, fragment)
             ?.addToBackStack(null)?.commit()
     }

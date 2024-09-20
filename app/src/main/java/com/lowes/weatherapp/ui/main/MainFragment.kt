@@ -14,13 +14,15 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.lowes.weatherapp.R
 import com.lowes.weatherapp.checkLocationPermission
+import dagger.hilt.android.AndroidEntryPoint
 
-class LookUpFragment : Fragment() {
+@AndroidEntryPoint
+class MainFragment : Fragment() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var city = ""
 
     companion object {
-        fun newInstance() = LookUpFragment()
+        fun newInstance() = MainFragment()
     }
 
     private lateinit var viewModel: MainViewModel
@@ -50,14 +52,14 @@ class LookUpFragment : Fragment() {
                 Toast.makeText(requireContext(), "City name cannot be empty", Toast.LENGTH_SHORT)
                     .show()
             } else {
-                val fragment = ItemFragment.newInstance(edtCity.text.toString())
+                val fragment = WeatherForecastFragment.newInstance(edtCity.text.toString())
                 activity?.supportFragmentManager?.beginTransaction()
                     ?.replace(R.id.container, fragment)?.addToBackStack(null)?.commit()
             }
         }
     }
 
-    //Get Last known location using GeoCoder and set in edit text
+    //Get Last known location using GeoCoder and set result in edit text
     private fun getLastKnownLocation() {
         if (checkLocationPermission(requireContext())) {
             fusedLocationProviderClient =

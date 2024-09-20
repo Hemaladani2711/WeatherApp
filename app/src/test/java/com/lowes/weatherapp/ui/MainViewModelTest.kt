@@ -1,10 +1,8 @@
 package com.lowes.weatherapp.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
-import com.lowes.weatherapp.WebService.Objects.Example
-import com.lowes.weatherapp.data.Repository
-import com.lowes.weatherapp.data.RepositoryImpl
+import com.lowes.weatherapp.data.RemoteRepository
+import com.lowes.weatherapp.data.RemoteRepositoryImpl
 import com.lowes.weatherapp.ui.main.MainViewModel
 import org.junit.Assert
 import org.junit.Before
@@ -19,13 +17,13 @@ class MainViewModelTest {
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var repository: Repository
+    private lateinit var remoteRepository: RemoteRepository
     private lateinit var mainViewModel: MainViewModel
 
     @Before
     fun setUp(){
-        repository = RepositoryImpl()
-        mainViewModel = MainViewModel(repository)
+        remoteRepository = RemoteRepositoryImpl()
+        mainViewModel = MainViewModel(remoteRepository)
     }
 
     @Test
