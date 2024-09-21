@@ -7,9 +7,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
 import com.lowes.weatherapp.R
 import com.lowes.weatherapp.checkLocationPermission
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedListener {
     private val LOCATION_PERMISSION_REQUEST_CODE = 1
 

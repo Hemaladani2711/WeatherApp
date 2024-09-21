@@ -14,9 +14,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.lowes.weatherapp.R
 import com.lowes.weatherapp.checkLocationPermission
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainFragment : Fragment() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var city = ""
@@ -64,7 +62,7 @@ class MainFragment : Fragment() {
         if (checkLocationPermission(requireContext())) {
             fusedLocationProviderClient =
                 LocationServices.getFusedLocationProviderClient(requireContext())
-            fusedLocationProviderClient?.lastLocation?.addOnSuccessListener { location ->
+            fusedLocationProviderClient.lastLocation?.addOnSuccessListener { location ->
                 location?.let {
                     val longitude = location.longitude
                     val latitude = location.latitude
@@ -72,7 +70,6 @@ class MainFragment : Fragment() {
                     val addresses = geocoder.getFromLocation(latitude, longitude, 1)
                     city = addresses?.get(0)?.locality.toString()
                     edtCity.setText(city)
-
                 }
             }
         }
